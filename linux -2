@@ -1,0 +1,623 @@
+Linux - 2:
+-----------
+Navigation and directory control commands:
+------------------------------------------
+- mkdir: make directory/ create directory
+- ls: list directory contents
+- tree: it will list contents of directories in a tree like format
+- cd: change directory
+- pwd: print working directory
+- rmdir: remove/delete directory
+- rm: it will remove/delete a file/ directory
+
+Difference b/w linux and DOS navigation and directory control commands:
+-----------------------------------------------------------------------
+	Linux			DOS
+	------			----
+	mkdir			md or mkdir
+	ls			dir
+	cd			cd or chdir
+	pwd			cd
+	rmdir			rd or rmdir
+	cd			cd/
+PEM stands for Privacy Enhanced Mail with extension .pem.
+
+Linux commands:
+---------------
+1. mkdir
+	mkdir directoryname --> mkdir Test
+	mkdir -v DevOps --> provide message after creating a directory. -v --> verbose --> used to provide a 	message
+2. ls
+
+To create dir' in tree format:
+-------------------------------
+DevOps
+	Linux
+		ShellScript
+				Git
+					Maven
+mkdir DevOPs/Linux/ShellScript/Git/Maven---> generta error
+mkdir -pv DevOPs/Linux/ShellScript/Git/Maven --> -p stands for parent
+
+To display all sub-directories:
+-------------------------------
+ls -- to display dir' content
+ls -r DevOps/
+ls -lart DevOps/
+
+tree-->install package 
+switch to root user --> sudo su -
+to install tree package and all binaries --> yum install tree -y
+
+To display detailed information of directories:   ls -l(long-list)
+------------------------------------------------
+- owner of directory
+- to which group this directory belongs too
+- what are the permissions
+- what is the size
+- when was it created, the timestamp
+
+drwxr-xr-x. 	2 		ec2-user ec2-user  6 Jan  6 09:42 devops
+permissions   no.of links	user      group        timestamp   dir'nm
+
+What is the root user home directory?
+	1. / ---> root directory
+	2. /root -->root user home directory
+	3. /home/root --> not a valid one
+	4. NA --> None of the above
+cd DevOps --> relative path --> from current directory
+cd /DevOps --> absolute path --> from root directory
+
+rm -rf remove non-empty directories
+-r --> recursive
+-f --> forceable
+
+rm -rf * ---> delete all the directories from the server --> not a good practice
+
+------x-----------x--------x--------x
+
+Linux - 3:
+-----------
+
+File Maintenance Commands:
+--------------------------
+1. touch: it will create the file with zero byte
+2. find: find command used to search and locate list of files and 
+----Refere to skype/whatsapp for these commands picture-----
+
+To create a file in a particular directory:
+--------------------------------------------
+touch Python/test.py
+
+-Absolute path start from root directory /
+-Relative path start from current directory ~
+
+Text Editors:
+-------------
+Notepad
+Notepad++
+Visual studio code ---> py, html, css, js
+MAC OS ---> TextMate
+Linux ---> vi --> simple text editor(used to create and view small size files), vim --> view large files, nano --> unix
+
+Syntax for creating a file in Linux:
+------------------------------------
+vi filename.extension
+vi File1.sh
+vi File2.java
+vi File3.py
+
+"devops.txt" 0L, 0B---> 0L-0lines and 0B-0bytes
+By default your file will start with command mode
+To get into insert mode from command mode hit on 'i' from keyboard
+To exit from file hit on 'esc key' and to forcely close file :q or :q!
+To save the content and then close file :wq--> write and quit
+To display the content of a file use 'cat filename.extension'
+
+find command:
+-------------
+---refer whatsapp or skype gallery for picture----
+
+Note: to find file present in current directory---> find .
+      to find file present in user home directory---> find ~
+find . -type f	----> display all files from current dir' even the hidden files will be displayed(system files)
+find . -type f -empty ----> display all empty files from current directory
+find . -type d ---> to display directories from current directory
+find . -type d -empty ----> display all empty directories from current directory
+find ~ -name devops.txt --> it will search devops.txt file under logged in user home directory
+find . -name devops.txt --> it will search devops.txt file under current directory
+find . -iname devops.txt
+
+inode----> refer skype gallery or whastapp for picture
+
+umask---> user mask/user file/directory creation mode mask
+	-root --> 0022
+	-ec2-user --> 0002
+
+To dislpay umask value for ec2-user:
+------------------------------------
+umask
+To dislpay umask value for root:
+--------------------------------
+switch to root user --> sudo su -
+umask
+
+Base permission value/standared value for a file ---> 0666
+Base permission value/standared value for a directory ---> 0777
+
+	umask	file	directory
+ec2-usr	0022	0644	0755
+root	0002	0664	0775
+
+ec2- -File---> base value - umask ---> 0666
+			       	     - 0022
+                                       -----
+                                       0644
+                                       -----
+root     -File---> base value - umask ---> 0666
+			       		 - 0002
+                                 	   -----
+                                 	   0664
+                                 	   -----
+
+ec2- -dir'---> base value - umask ---> 0777
+			       	     - 0022
+                                       -----
+                                       0755
+                                       -----
+root     -dir'---> base value - umask ---> 0777
+			       		 - 0002
+                                 	   -----
+                                 	   0775
+                                 	   -----
+Directory:
+----------
+7	5	1
+drwx	-xr	-x
+owner	group	others
+user
+
+Read-->default value-->4
+Write-->default value-->2
+Execute-->default value-->1
+total-->7
+
+Maximum umask value----> 777
+Minimum umask value----> 000
+
+chmod ---> change mode---> change permission for file/directories
+chmod 000---> remove all permissions
+
+Color			FileType
+------			---------
+Blue			Directories
+White			TextFiles
+Pink			Images
+Red			Compressed
+Cyan			softlinks
+Green			Executable
+Yellow			Devices
+FlashingRed		Broken links
+-----------x--------------x------------x--------------x----------------x--------
+
+Linux - 4:
+----------
+
+NOTE: Change the umask value with root privileges we can do that configuration through certain files like /etc/lodin.def or /etc/pam.d/login or /etc/profile
+
+To provide only read permission for a file using alphabets in plcae of numeric value:
+--------------------------------------------------------------------------------------
+chmod rrr devops.txt ---> wrong 
+chmod +r devops.txt ---> correct
+
+To provide read access only for the user:
+-----------------------------------------
+chmod u+r devops.txt
+
+To provide rwx for user and rw for group and others:
+----------------------------------------------------
+chmod u+rwx,go+rw devops.txt
+
+To provide all permissions for all the three categories:
+--------------------------------------------------------
+chmod ugo+rwx devops.txt
+
+To remove permissions for all three categories:
+-----------------------------------------------
+chmod ugo-rwx devops.txt
+
+To provide permissions or change mode for both sub-directories and files inside a directory:
+--------------------------------------------------------------------------------------------
+chmod -R 777 Python/
+'R'---> recursive
+rm '-r' ---> recursive
+man chmod
+
+To create a hidden file:
+------------------------
+mkdir .test
+ls -la---> to view hidden dir'
+-to change permissions for hidden dir' ---> chmod 700 .test/
+
+NOTE: +rwx permissions will not be given for all the 3 categories because by default wrire permission cannot be given implicitly. Where as thw permission can be provided explicitly like chmod ugo+rwx filename
+
+To change owner for a file:
+---------------------------
+chown divya devops.txt
+- switch to root without loading the croot configuration ie., sudo su
+- chown root devops.txt
+- chown root Python/
+- chown -R root Python/
+
+To change group name:
+---------------------
+chgrp-->chnage group name
+
+Note: Both chown and chgrp should have root privileges to perform
+
+chgrp root file/dir'Name
+
+To provide pre-defined group name:
+---------------------------------
+Will be available in /etc/group/
+- etc dir' will be in root
+- sudo su
+- cat /etc/group
+- select wheel as group name
+- chgrp wheel devops.txt
+- chgrp wheel Python/
+- chgrp -R wheel Python/
+
+To change both owner and groupname with a single command:
+---------------------------------------------------------
+chown username:groupname filename/dir'name
+
+chown ec2-user:ec2-user devops.txt
+
+/Python--->root and Python/--->relative path/current dir'
+
+cp-->copy command:
+------------------
+cp devops.txt DevOps/--->file-dir
+cp DevOps/ Python/--->dir'-dir'--->error
+cp -r DevOps/ Python/-->recursively copy the dir' into another dir'
+
+How to take backup of a file from current dir':
+-----------------------------------------------
+cp whattocopy wheretocopy
+cp devops.tx devops.txt_bak
+
+To rename file and dir':
+------------------------
+mv ---> move/rename file or dir'
+
+mv existingfilename newfilename
+mv dirname/ newname
+
+mv filename dir/-->move file to dir'
+mv dir/ dir/
+mv whattomove wheretomove
+
+NOTE: No access to move files or directories into an empty dir'
+
+Difference b/w mv and cp:
+-------------------------
+mv ---> used only to move files from one dir' to another dir' and also to rename files and dir'
+cp ---> copies the file and the content of that file 
+
+file:---> identify type of file it is
+-----
+ASCII --> American Standard Code for Information Interchange
+file--> used to display type and format of a file or to read content of a file
+
+wc:--> word count:
+------------------
+wc devops.sh --> display count of lines, words and characters available in a particular file
+wc -w filename--> count of words
+wc -l filename--> count of lines
+wc -c filename--> count of characters
+wc -w *.txt-->count of word for all files with extension .txt
+wc -w *.*-->count of word for all files without respect to extensions
+
+ln-->link:
+----------
+/var/logs/flipkart.log
+/tmp/flipkart.log
+cp -p sample1.c Python/sample1.c ---> -p stands for preserving the permissions
+
+There're 2 types of links:
+--------------------------
+1. hard link
+2. soft link
+
+	hard link			soft link
+	---------			---------
+	-ln				-ln -s
+	-delete original file		-deleted file cannot be accessed either of dir'
+	still can access the link
+	file
+	-username,groupname, will be	-it will not be maintained
+	maintained for link file also
+	-1GB				-10bytes
+	-ln flipkart.log flipkart_hl.log -ln -s flipkart.log flipkart_sl.log
+	-OF & LF having same prop	-OF & LF have diff' prop
+	-inode no. also same		-inode no is diff' for OF & LF 
+	-create only for files		-creates for files & dir'
+
+ln DevOps/ DevOps_hl ---> create a hardlink for dir'-->error
+ln -s DevOps/ DevOps_hl ---> create a softlink through which hardlink can be created for dir'
+ls -li ---> to view inode number
+ln -s sample1.c sample1_sl.c ---> create softlink fro files
+vi sample1.c --> update content
+cat sample1_sl.c ---> view content
+rm -f devops.sh ---> delet OF
+cat devops_hl.sh ---> still can view hardlink file content
+rm -f sample1.c ---> delete OF
+cat sample1_sl.c ---> since OF deleted softlink file cannot be viewed
+rm -rf DevOps/ ---> delete OD
+ls -l DevOps/ ---> cannot access dir' as it HL was created through SL
+-----------------x------------------x------------------x----------------x----------
+
+Linux 5:
+--------	
+
+- In home directory do the following configuration for sessions to not end within 15-30mins:
+- createa file vi ~/.ssh/config
+	Host *
+	   ServerAliveInterval 30
+	   ServerAliveCountMax 2
+
+Text Configuration Command:
+---------------------------
+1. vi or vim
+2. nano 
+
+Text Reading/Display command:
+-----------------------------
+- echo
+- cat
+- head
+- tail
+- more
+- less
+- sort
+- tr
+- sed --> stream editor
+- grep
+
+echo: --> to display the statement or whatever we want to display/print
+echo hello
+echo hello		hi-->hellohi
+echo "" or ''---> to maintain spacing b/w word
+
+cat -n sudoers ---> display content of a file along with file no. using -n option
+
+head --> by default only first 10 lines will be displayed. To specify more lines 
+
+sed --> to display specific line from a file or to display range of lines
+
+more --> to display content of file upto the size of screen
+
+sort --> to sort the content in a file
+- to sort the content of a file in ascending order --> sort filename
+- to sort the content of a file in descending order --> sort -r filename --> -r (reverse)
+- to give one command out as input to other command --> cat filename | sort or cat filename | sort -r
+
+tr --> to translate from uppercase to lowercase
+- cat friends.txt | sort | tr [a-z] [A-Z] 
+
+grep---> which stands for "global regular expression print", processes text line by line and prints any lines which match a specified pattern
+
+grep wordtosearch filename --> will fetch the word with case sensitive
+grep -i wordtoseach filename --> will fetch the word without considering the case sensitive
+
+sed "s/red/blue/" filename ---> change all line first word to blue
+sed "s/red/blue/2" filename ---> chnage all the second word to blue
+sed "s/red/blue/g" filename ---> chnage all the word in a file to blue but these changes will not be applied in the file permanently
+sed -i "s/red/blue/g" filename ---> changes will be permanently applied in files too
+------------------------x-----------------x-------------x-----------------x-------------x-----------
+
+Linux 6:
+--------
+
+System Resources Commands:
+--------------------------
+- who: display information about who logges to the server
+- w
+- users
+- whoami
+- whereis
+- date
+- df
+- du
+- hostname
+- ifconfig
+- man
+- info
+- help
+- whatis
+- service
+- systemctl list-unit-files
+- uptime
+- last
+
+Process Management Commands:
+----------------------------
+- ps
+- kill
+- top
+
+1. who: display information about who logges to the server
+	. who
+	. who -H(human-readable,heading)
+2. w(what): what means, what user is doing
+	provides more information about user, terminal, time, system and also what the user is doing and how long system is running
+	. w
+3. uptime: displays details of how long the system is running
+	1.00,1.60,1.01--->1core cpu--> 100% CPU utilization
+	8core cpu--> 7.00 6.82 6.00---> still not 100%CPU Utilization
+	. uptime
+	. cat /proc/cpiino--> displays no.of cpu core for particular instance
+4. users: displys the user
+	. user
+5. whoami: displays the current user who executed the command
+	Each command has the binary files and some manual pages(description about that particular command)like, 	. usage of command
+	. options with description. so these are details which would differe
+6. whereis: to find where java files are located
+	by default along with server python s/w is installed
+	. whereis nano
+7. date: to display date 
+	- to specify or change the time and date we should login as administrator 
+	- timedatectl: command used to set date according to various country's timezone
+8. 
+
+
+
+
+
+
+Linux 7:
+--------
+Archive/Data Backup commands:
+-----------------------------
+	.zip-->compressing the files
+	.unzip-->extracting compressed file
+	.tar-->expansion of .zip-->more compression than zip
+	.tar.gz-->more compression than tar 
+
+Maven-->build tool-->create packages-->.jar,.war,.ear
+
+devops.txt-->200MB
+devops.zip-->100MB
+devops.tar-->80MB
+devops.tar.gz-->60MB
+GNU not unix-->Utility
+
+1. zip:
+	zip filename.zip Directoryname
+2. unzip:
+	unzip filename.zip 
+3. tar:
+	tar -cvf filename.tar Directoryname
+	tar -xvf filename.tar
+4. tar.gz:
+	tar -zcvf filename.tar.gz Directoryname
+	tar -xvf filenmae.tar.gz Directoryname
+-c-->create
+-v-->verbose
+-f-->filesystem
+-x-->extract
+-z-->uncompress the resulting archieve with gzip command
+
+
+User/Group Administration commands:
+-----------------------------------
+1.useradd
+2.passwd
+3.chage
+4.groupadd
+5.usermod
+6.id
+7.groups
+8.lid
+9.su
+10.sudo
+11.userdel
+12.groupdel
+passwd
+shadow
+group
+
+Linux 8:
+--------
+Automating/Scheduling Task Commands:
+------------------------------------
+Crontab: Crontab is a task deliverying window
+
+ReportGenerator.java
+hello.sh-->shellscript
+./hello.sh
+
+crontab -l(list): list how many jobs are configured
+crontab -e(edit): to config job
+crontab -r(remove): tp delete the job
+sudo crontab -l -u(user) username: to display other user cron job details. As a normal user we cannot execute this command and only the root user can do it
+
+sudo touch /etc/cron.allow--->creation
+sudo vi /etc/cron.allow--->edit/update
+ec2-user
+Divya
+Girisha
+
+automate.sh
+echo "Hello everyone"
+echo "Good afternoon"
+echo "Today date is:"
+date
+
+*		9 	1 	* 	* 	/home/ec2-user/automate.sh >/dev/null 2>&1
+everymin	hours	mod	Dow	command absolutepath               null device file 
+
+* 9 1 * * /home/ec2-user/automate.sh >/dev/null 2>&1---> every 1st day of the month at 9AM
+*/1 * * * * /home/ec2-user/automate.sh > /home/ec2-user/automate.log 2>&1--->this is for everymin
+
+
+log--->o/p
+>--->only to redirect standard o/p and not the error
+>>--->append the standard output
+File descriptors:
+-----------------
+0--->standard i/p
+1--->standard o/p
+2--->standard error
+
+watch command---> not neccessary
+
+step1: connect to server using pemfile
+step2: set password for the user to which user wants to connect
+step3: do some configuration in sshd_config file which is available in etc/ssh di'
+step4: restart the sshd service
+
+scp--> securely copy through the servers
+copy file:
+scp filename username@ipadd/hn:/tmp/
+
+copy dir':
+scp -r dirname username@ipadd/hn:/tmp/
+
+sudo rm -rf *---> delete all files and dir'
+
+chmod 600 ~/.ssh/*
+wget -o /tmp/maven.zip https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.zip
+
+Hardware information commands:
+free: 
+free -H
+dmidecode
+
+miscelleanous commands:
+1.clear
+2.cal
+3.wget
+4.tee
+5.script
+6.ping
+7.telnet
+8.history
+9.uname
+10.cat /etc/*release
+11.netstat-tunlap
+12.watch
+13.shutdown
+14.restart
+15.reboot
+16.exit
+
+netstat-tunlap:
+t-tcp
+u-udp
+n-port no
+l-list the ports
+a -all
+p -portno
+
